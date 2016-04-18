@@ -51,6 +51,12 @@ public class MainActivity extends Activity {
 
     }   // Main Method
 
+    public void clickSetCalendar(View view) {
+        startActivity(new Intent(MainActivity.this, SetCalendarActivity.class));
+    }
+
+
+
     public void clickCalendar(View view) {
 
         String tag = "18April";

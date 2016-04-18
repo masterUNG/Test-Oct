@@ -33,6 +33,13 @@
         android:id="@+id/button"
         android:onClick="clickCalendar" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Set Calendar"
+        android:id="@+id/button2"
+        android:onClick="clickSetCalendar" />
+
     <ListView
         android:id="@+id/listView1"
         android:layout_width="match_parent"
