@@ -9,8 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -50,12 +49,39 @@ public class MainActivity extends Activity {
                 showTimePickerDialog(buttonstartSetDialog);
             }});
 
-    }
+    }   // Main Method
+
+    public void clickCalendar(View view) {
+
+        String tag = "18April";
+
+        Calendar calendar = Calendar.getInstance();
+        int intDay = calendar.get(Calendar.DAY_OF_MONTH);
+        int intMonth = calendar.get(Calendar.MONTH);
+        int intMinus = calendar.get(Calendar.MINUTE);
+
+        Calendar myCalendar1 = (Calendar) calendar.clone();
+
+        Log.d(tag, "intDay ==> " + intDay);
+        Log.d(tag, "intMonth ==> " + intMonth);
+
+        intDay += 1;
+        intMinus += 2;
+
+        myCalendar1.set(Calendar.DAY_OF_MONTH, intDay);
+        myCalendar1.set(Calendar.MINUTE, intMinus);
+
+        Log.d(tag, "myCalendar1 ==> " + myCalendar1.toString());
+
+        setAlarm(myCalendar1);
+
+    }   // clickCalendar
+
 
     public void showTimePickerDialog(View v) {
         DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getFragmentManager(), "timePicker");
-    }
+    }   // showTimePickerDialog
 
     class TimePickerFragment extends DialogFragment
             implements TimePickerDialog.OnTimeSetListener {
@@ -81,6 +107,8 @@ public class MainActivity extends Activity {
                 cal.set(Calendar.HOUR_OF_DAY, hourOfDay);
                 cal.set(Calendar.MINUTE, minute);
 
+                Log.d("18April", "cal ==> " + cal.toString());
+
                 setAlarm(cal);
             }
             callCount++;
@@ -101,12 +129,13 @@ public class MainActivity extends Activity {
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, targetCal.getTimeInMillis(), pendingIntent);
 
-    }
+    }   // setAlarm
 
     @Override
     protected void onResume() {
         super.onResume();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,listValue);
         listAlarm.setAdapter(adapter);
-    }
-}
+    }   // onResume
+
+}   // Main Class
